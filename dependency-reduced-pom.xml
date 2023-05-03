@@ -4,7 +4,7 @@
   <groupId>io.kx</groupId>
   <artifactId>loan-application-13420</artifactId>
   <name>loan-application-13420</name>
-  <version>1.0-SNAPSHOT</version>
+  <version>3.0-SNAPSHOT</version>
   <build>
     <extensions>
       <extension>

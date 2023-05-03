@@ -9,7 +9,7 @@ package io.kx.loanapp.api;
 option java_outer_classname = "LoanAppApi";
 
 message SubmitCommand {
-  string loan_app_id = 1;
+  string loan_app_id = 1 [(kalix.field).entity_key = true];
   string client_id = 2;
   int64 client_monthly_income_cents = 3;
   int64 loan_amount_cents = 4;
@@ -33,15 +33,15 @@ message LoanAppState {
 }
 
 message GetCommand {
-  string loan_app_id = 1;
+  string loan_app_id = 1 [(kalix.field).entity_key = true];
 }
 
 message ApproveCommand {
-  string loan_app_id = 1;
+  string loan_app_id = 1 [(kalix.field).entity_key = true];
 }
 
 message DeclineCommand {
-  string loan_app_id = 1;
+  string loan_app_id = 1 [(kalix.field).entity_key = true];
   string reason = 2;
 }
 

@@ -11,4 +11,5 @@ import "kalix/annotations.proto";
 // Documentation at https://docs.kalix.io/services/using-acls.html
 option (kalix.file).acl = {
   allow: { service: "*" }
+  allow: { principal: INTERNET }
 };

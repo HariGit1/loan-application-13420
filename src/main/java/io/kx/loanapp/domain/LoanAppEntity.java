@@ -6,6 +6,8 @@ import io.kx.loanapp.api.LoanAppApi;
 import kalix.javasdk.eventsourcedentity.EventSourcedEntity;
 import kalix.javasdk.eventsourcedentity.EventSourcedEntity.Effect;
 import kalix.javasdk.eventsourcedentity.EventSourcedEntityContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 // This class was initially generated based on the .proto definition by Kalix tooling.
 // This is the implementation for the Event Sourced Entity Service described in your io/kx/loanapp/api/loan_app_api.proto file.
@@ -16,6 +18,7 @@ import kalix.javasdk.eventsourcedentity.EventSourcedEntityContext;
 public class LoanAppEntity extends AbstractLoanAppEntity {
 
   @SuppressWarnings("unused")
+  Logger logger = LoggerFactory.getLogger("LoanAppEntity");
   private final String entityId;
 
   public LoanAppEntity(EventSourcedEntityContext context) {
@@ -62,12 +65,35 @@ public class LoanAppEntity extends AbstractLoanAppEntity {
 
   @Override
   public Effect<Empty> approve(LoanAppDomain.LoanAppDomainState currentState, LoanAppApi.ApproveCommand approveCommand) {
-    return effects().error("The command handler for `Approve` is not implemented, yet");
+    if(currentState.equals(LoanAppDomain.LoanAppDomainState.getDefaultInstance())) {
+      return effects().error("NOT FOUND");
+    } else if (currentState.getStatus() == LoanAppDomain.LoanAppDomainStatus.STATUS_IN_REVIEW) {
+      LoanAppDomain.Approved approvedEvent = LoanAppDomain.Approved.newBuilder()
+              .setLoanAppId(approveCommand.getLoanAppId())
+              .setEventTimestamp(Timestamps.fromMillis(System.currentTimeMillis()))
+              .build();
+      return effects().emitEvent(approvedEvent).thenReply(any -> Empty.getDefaultInstance());
+    } else if(currentState.getStatus() == LoanAppDomain.LoanAppDomainStatus.STATUS_APPROVED) {
+      return effects().reply(Empty.getDefaultInstance());
+    } else {
+      return effects().error("WRONG STATUS");
+    }
   }
 
   @Override
   public Effect<Empty> decline(LoanAppDomain.LoanAppDomainState currentState, LoanAppApi.DeclineCommand declineCommand) {
-    return effects().error("The command handler for `Decline` is not implemented, yet");
+    if(currentState.equals(LoanAppDomain.LoanAppDomainState.getDefaultInstance())) {
+      return effects().error("NOT FOUND");
+    } else if (currentState.getStatus() == LoanAppDomain.LoanAppDomainStatus.STATUS_IN_REVIEW) {
+      LoanAppDomain.Declined declinedEvent = LoanAppDomain.Declined.newBuilder()
+              .setReason(declineCommand.getReason())
+              .setLoanAppId(declineCommand.getLoanAppId())
+              .setEventTimestamp(Timestamps.fromMillis(System.currentTimeMillis()))
+              .build();
+      return effects().emitEvent(declinedEvent).thenReply(any -> Empty.getDefaultInstance());
+    } else {
+      return effects().error("STATUS ERROR");
+    }
   }
 
   @Override
@@ -83,11 +109,17 @@ public class LoanAppEntity extends AbstractLoanAppEntity {
   }
   @Override
   public LoanAppDomain.LoanAppDomainState approved(LoanAppDomain.LoanAppDomainState currentState, LoanAppDomain.Approved approved) {
-    throw new RuntimeException("The event handler for `Approved` is not implemented, yet");
+    return currentState.toBuilder()
+            .setStatus(LoanAppDomain.LoanAppDomainStatus.STATUS_APPROVED)
+            .setLastUpdateTimestamp(approved.getEventTimestamp())
+            .build();
   }
   @Override
   public LoanAppDomain.LoanAppDomainState declined(LoanAppDomain.LoanAppDomainState currentState, LoanAppDomain.Declined declined) {
-    throw new RuntimeException("The event handler for `Declined` is not implemented, yet");
+    return currentState.toBuilder()
+            .setStatus(LoanAppDomain.LoanAppDomainStatus.STATUS_DECLINED)
+            .setLastUpdateTimestamp(declined.getEventTimestamp())
+            .build();
   }
 
 }
