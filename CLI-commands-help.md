@@ -1,14 +1,14 @@
 # Helpful CLI commands during Kalix application development and deployment:
 
-## From the application's root folder, run following to compile, package, build a docker image and push to the docker registry defined in pom file.
+### From the application's root folder, run following to compile, package, build a docker image and push to the docker registry defined in pom file.
 ```sh
 mvn clean compile package docker:build docker:push
 ```
 
-### In the logs, you should see similar like this: [INFO] DOCKER> Tagging image klx-wrk/loan-application-13420:5.0-SNAPSHOT successful!
+#### In the logs, you should see similar like this: [INFO] DOCKER> Tagging image klx-wrk/loan-application-13420:5.0-SNAPSHOT successful!
 
-### Now once the image is pushed, let's deploy the microservice in Kalix
-### make sure your cli is authenticated to Kalix console, help doc here: https://docs.kalix.io/kalix/kalix_auth_login.html
+#### Now once the image is pushed, let's deploy the microservice in Kalix
+#### make sure your cli is authenticated to Kalix console, help doc here: https://docs.kalix.io/kalix/kalix_auth_login.html
 
 ## list available projects
 ```sh
