@@ -69,11 +69,12 @@ loanapp-13420   shy-flower-2473.westpac-ap-southeast-2.kalix.app   /->loanapp-13
 ```sh
 grpcurl -d '{"loan_app_id": "some_uuid", "client_id": "client100", "client_monthly_income_cents": 100000, "loan_amount_cents": 200000, "loan_duration_months": 28}' shy-flower-2473.westpac-ap-southeast-2.kalix.app:443 io.kx.loanapp.api.LoanAppService/Submit
 ```
-
+```sh
 Expected response:
 {
 
 }
+```
 
 
 
@@ -82,7 +83,7 @@ Expected response:
 grpcurl -d '{"loan_app_id": "some_uuid"}' shy-flower-2473.westpac-ap-southeast-2.kalix.app:443 io.kx.loanapp.api.LoanAppService/Get
 ```
 
-
+```sh
 Expected response:
 
 {
@@ -91,3 +92,4 @@ Expected response:
 "loan_amount_cents": "4000000",
 "loan_duration_months": 28
 }
+```
