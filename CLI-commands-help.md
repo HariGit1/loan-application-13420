@@ -1,5 +1,19 @@
 # Helpful CLI commands during Kalix application development and deployment:
 
+## Running application locally on your machine
+
+### First, run the docker file from root of project folder
+```sh
+docker-compose up
+```
+
+### Then run the application
+```sh
+mvn exec:exec
+```
+
+# Deploying application on Kalix environment
+
 ### From the application's root folder, run following to compile, package, build a docker image and push to the docker registry defined in pom file.
 ```sh
 mvn clean compile package docker:build docker:push
