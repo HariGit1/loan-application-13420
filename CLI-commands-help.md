@@ -16,17 +16,17 @@ kalix projects list
 ```
 
 #### kalix-training project is created by admin, and make sure you are added into this project by the admin (reach out to Rushi if you are not already there)
-#### set kalix-training active project or switch from another project
+### Set kalix-training active project or switch from another project
 ```sh
 kalix config set project kalix-training
 ```
 
-### get services within the project
+### Get services within the project
 ```sh
 kalix services list
 ```
 
-### deploy your Kalix microservice, make sure you name 'loanapp' to your unique service name like 'loanapp-{last-4-digits-of-your-id}'' so that service name does not clash and override with other users
+### Deploy your Kalix microservice, make sure you name 'loanapp' to your unique service name like 'loanapp-{last-4-digits-of-your-id}'' so that service name does not clash and override with other users
 ```sh
 kalix service deploy loanapp-13420 registry.digitalocean.com/klx-wrk/loan-application-13420:3.0-SNAPSHOT
 ```
@@ -36,20 +36,20 @@ kalix service deploy loanapp-13420 registry.digitalocean.com/klx-wrk/loan-applic
 kalix services list
 ```
 
-#### you can also restart your service, delete your service and do a bunch more stuff, doc here: https://docs.kalix.io/kalix/kalix_services.html
+#### You can also restart your service, delete your service and do a bunch more stuff, doc here: https://docs.kalix.io/kalix/kalix_services.html
 
-#### once your service shows ready after issuing 'kalix service list', you can expose your service and test it, make sure you include the ACL as in line #14 in https://github.com/ceecer1/loan-application-13420/blob/step2/src/main/proto/io/kx/loanapp/kalix_policy.proto
+#### Once your service shows ready after issuing 'kalix service list', you can expose your service and test it, make sure you include the ACL as in line #14 in https://github.com/ceecer1/loan-application-13420/blob/step2/src/main/proto/io/kx/loanapp/kalix_policy.proto
 
 #### ACL documentation for Java Protobuf SDK is here: https://docs.kalix.io/java-protobuf/access-control.html
 
 #### You need to recompile, rebuild the image, push and deploy the new version.
 
-### expose your service, this will auto-generate a hostname and a route to your service.
+### Expose your service, this will auto-generate a hostname and a route to your service.
 ```sh
 kalix service expose loanapp-13420
 ```
 
-### you can list route and get below response:
+### You can list route and get below response:
 ```sh
 kalix route list
 ```
@@ -62,7 +62,7 @@ loanapp-13420   shy-flower-2473.westpac-ap-southeast-2.kalix.app   /->loanapp-13
 
 
 
-#### you can issue following grpc calls from your terminal to access the exposed grpc service endpoints over the Internet.
+#### You can issue following grpc calls from your terminal to access the exposed grpc service endpoints over the Internet.
 
 ### Submit a Loan application
 
