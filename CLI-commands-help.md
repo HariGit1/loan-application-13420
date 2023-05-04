@@ -10,13 +10,13 @@ mvn clean compile package docker:build docker:push
 #### Now once the image is pushed, let's deploy the microservice in Kalix
 #### make sure your cli is authenticated to Kalix console, help doc here: https://docs.kalix.io/kalix/kalix_auth_login.html
 
-## list available projects
+### list available projects
 ```sh
 kalix projects list
 ```
 
-## kalix-training project is created by admin, and make sure you are added into this project by the admin (reach out to Rushi if you are not already there)
-## set kalix-training active project or switch from another project
+#### kalix-training project is created by admin, and make sure you are added into this project by the admin (reach out to Rushi if you are not already there)
+#### set kalix-training active project or switch from another project
 ```sh
 kalix config set project kalix-training
 ```
