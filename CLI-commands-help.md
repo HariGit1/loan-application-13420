@@ -12,7 +12,7 @@ docker-compose up
 mvn exec:exec
 ```
 
-# Deploying application on Kalix environment
+## Deploying application on Kalix environment
 
 ### From the application's root folder, run following to compile, package, build a docker image and push to the docker registry defined in pom file.
 ```sh
