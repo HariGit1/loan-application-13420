@@ -70,7 +70,7 @@ Create: <br>
 
 <i><b>Tip</b></i>: Check content in `step-1` git branch
 ## Add codegen annotations in API data structure and endpoints (GRPC)
-In `src/main/proto/io/kx/loanapp/api/loan_app_api.proto` add AkkaServerless codegen annotations to GRPC service
+In `src/main/proto/io/kx/loanapp/api/loan_app_api.proto` add Kalix codegen annotations to GRPC service
 ```
 service LoanAppService {
 ```
@@ -272,7 +272,7 @@ Create: <br>
 
 <i><b>Tip</b></i>: Check content in `step-2` git branch
 ## Add codegen annotations in API data structure and endpoints (GRPC)
-In `src/main/proto/io/kx/loanproc/api/loan_proc_api.proto` add AkkaServerless codegen annotations to GRPC service
+In `src/main/proto/io/kx/loanproc/api/loan_proc_api.proto` add Kalix codegen annotations to GRPC service
 ```
 service LoanProcService {
 ```
@@ -313,7 +313,7 @@ Integration tests:<br>
 ## Update Main class
 In `src/main/java/io/kx/Main` you need to add new entity component (`LoanProcEntity`):
 ```
- return AkkaServerlessFactory.withComponents(LoanAppEntity::new, LoanProcEntity::new);
+ return KalixFactory.withComponents(LoanAppEntity::new, LoanProcEntity::new);
 ```
 ## Implement entity skeleton class
 Implement `src/main/java/io/kx/loanproc/domain/LoanProcEntity` class<br>
@@ -433,7 +433,7 @@ Compile will generate help classes (`target/generated-*` folders) and skeleton c
 
 In `src/main/java/io/kx/Main` you need to add view (`LoanProcByStatusView`) initialization:
 ```
- return AkkaServerlessFactory.withComponents(LoanAppEntity::new, LoanProcEntity::new, LoanProcByStatusView::new);
+ return KalixFactory.withComponents(LoanAppEntity::new, LoanProcEntity::new, LoanProcByStatusView::new);
 ```
 
 ## Implement view LoanProcByStatusView skeleton class
@@ -518,7 +518,7 @@ Compile will generate help classes (`target/generated-*` folders) and skeleton c
 
 In `src/main/java/io/kx/Main` you need to add view (`LoanAppEventingToProcAction` & `LoanProcEventingToAppAction`) initialization:
 ```
- return AkkaServerlessFactory.withComponents(LoanAppEntity::new, LoanProcEntity::new, LoanAppEventingToProcAction::new, LoanProcByStatusView::new, LoanProcEventingToAppAction::new);
+ return KalixFactory.withComponents(LoanAppEntity::new, LoanProcEntity::new, LoanAppEventingToProcAction::new, LoanProcByStatusView::new, LoanProcEventingToAppAction::new);
 ```
 ## Implement view LoanAppEventingToProcAction skeleton class
 Implement `src/main/java/io/kx/loanapp/action/LoanAppEventingToProcAction` class<br>
