@@ -53,14 +53,15 @@ public class LoanAppEntity extends AbstractLoanAppEntity {
 
   @Override
   public Effect<LoanAppApi.LoanAppState> get(LoanAppDomain.LoanAppDomainState currentState, LoanAppApi.GetCommand getCommand) {
-    LoanAppApi.LoanAppState state = LoanAppApi.LoanAppState.newBuilder()
+    LoanAppApi.LoanAppState apiState = LoanAppApi.LoanAppState.newBuilder()
             .setClientId(currentState.getClientId())
             .setClientMonthlyIncomeCents(currentState.getClientMonthlyIncomeCents())
             .setLoanAmountCents(currentState.getLoanAmountCents())
             .setLoanDurationMonths(currentState.getLoanDurationMonths())
             .setStatus(LoanAppApi.LoanAppStatus.forNumber(currentState.getStatus().getNumber()))
+            .setLastUpdateTimestamp(currentState.getLastUpdateTimestamp())
             .build();
-    return effects().reply(state);
+    return effects().reply(apiState);
   }
 
   @Override
