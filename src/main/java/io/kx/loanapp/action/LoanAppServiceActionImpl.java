@@ -27,7 +27,7 @@ public class LoanAppServiceActionImpl extends AbstractLoanAppServiceAction {
             components().loanAppServiceActionImpl().expireAction(
                     LoanAppApi.DeclineCommand.newBuilder()
                             .setLoanAppId(submitCommand.getLoanAppId())
-                            .setReason("")
+                            .setReason("Declined after 20 secs")
                             .build()));
 
     return effects().asyncReply(
